@@ -1,14 +1,61 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donasi</title>
-    <script>
-        window.location.href = "https://saweria.co/IDMworkbot";
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pilih Paket Upgrade</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #004b8d, #001f3f);
+      padding: 20px;
+      color: white;
+    }
+    .container {
+      background: white;
+      color: #333;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function donasi(nominal, paket) {
+      const tg = window.Telegram?.WebApp;
+      const username = tg?.initDataUnsafe?.user?.username || "pengguna";
+      const url = `https://saweria.co/IDMworkbot?nominal=${nominal}&message=Upgrade%20(${paket})%20dari%20@${username}`;
+      window.location.href = url;
+    }
+  </script>
 </head>
 <body>
-    <p>Jika tidak dialihkan, klik <a href="https://saweria.co/IDMworkbot">di sini</a></p>
+  <div class="container">
+    <h2>Pilih Paket Upgrade</h2>
+    <button class="btn" onclick="donasi(10000, 'Limit 300')">Rp10.000 - Limit 300</button>
+    <button class="btn" onclick="donasi(25000, 'Premium 30 hari')">Rp25.000 - Premium 30 Hari</button>
+    <button class="btn" onclick="donasi(50000, 'Premium 60 hari')">Rp50.000 - Premium 60 Hari</button>
+  </div>
 </body>
 </html>
