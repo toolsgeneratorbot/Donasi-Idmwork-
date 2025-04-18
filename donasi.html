@@ -40,6 +40,19 @@
     .btn:hover {
       background-color: #0056b3;
     }
+    .info {
+      margin-top: 20px;
+      font-size: 15px;
+      color: #444;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #ddd;
+    }
   </style>
   <script>
     function donasi(nominal, paket) {
@@ -56,6 +69,16 @@
     <button class="btn" onclick="donasi(10000, 'Limit 300')">Rp10.000 - Limit 300</button>
     <button class="btn" onclick="donasi(25000, 'Premium 30 hari')">Rp25.000 - Premium 30 Hari</button>
     <button class="btn" onclick="donasi(50000, 'Premium 60 hari')">Rp50.000 - Premium 60 Hari</button>
+
+    <div class="info">
+      Setelah memilih paket, kamu akan diarahkan ke halaman pembayaran Saweria.<br><br>
+      Setelah melakukan pembayaran, silakan <strong>kirim bukti transfer ke bot</strong> untuk diproses otomatis oleh sistem kami.<br><br>
+      Terima kasih telah mendukung layanan IDMwork_bot!
+    </div>
   </div>
+
+  <footer>
+    &copy; 2025 IDMwork_bot | All Rights Reserved
+  </footer>
 </body>
 </html>
