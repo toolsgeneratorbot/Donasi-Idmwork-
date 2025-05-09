@@ -3,98 +3,422 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pilih Paket Upgrade</title>
+  <title>Upgrade Premium - IDMwork Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --success: #4cc9f0;
+      --warning: #f8961e;
+      --light: #f8f9fa;
+      --dark: #212529;
+    }
+    
     body {
       font-family: 'Poppins', sans-serif;
       text-align: center;
       background: linear-gradient(135deg, #004b8d, #001f3f);
       padding: 20px;
       color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+    
     .container {
       background: white;
-      color: #333;
-      padding: 25px;
+      color: var(--dark);
+      padding: 30px;
       border-radius: 15px;
-      max-width: 400px;
-      margin: auto;
+      max-width: 450px;
+      margin: 20px auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
+    
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.8rem;
     }
-    .btn {
-      display: block;
+    
+    .package-container {
+      margin: 25px 0;
+    }
+    
+    .btn-package {
+      display: flex;
+      flex-direction: column;
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      background-color: #007bff;
+      padding: 16px;
+      margin: 12px 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      align-items: center;
     }
-    .btn:hover {
-      background-color: #0056b3;
+    
+    .btn-package:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-    .info {
-      margin-top: 20px;
-      font-size: 15px;
-      background-color: #ffe5e5;
-      padding: 15px;
-      border-radius: 10px;
-      border-left: 5px solid red;
-      color: #222;
+    
+    .btn-package:active {
+      transform: translateY(1px);
     }
-    .info h3 {
-      color: #c00;
-      margin-top: 0;
+    
+    .best-value {
+      border: 2px solid var(--accent);
     }
-    .info a {
-      display: inline-block;
-      background-color: #0088cc;
+    
+    .best-value::after {
+      content: "PALING EKONOMIS";
+      background: var(--accent);
       color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      position: absolute;
+      top: -8px;
+      right: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .price-per-day {
+      display: block;
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 5px;
+      font-weight: 400;
+    }
+    
+    .info-box {
+      margin-top: 30px;
+      font-size: 15px;
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 5px solid var(--success);
+      color: var(--dark);
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .info-box h3 {
+      color: var(--secondary);
+      margin-top: 0;
+      font-weight: 600;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-confirm {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), #b5179e);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 10px;
       text-decoration: none;
+      font-weight: 600;
+      margin: 15px 0 5px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      text-align: center;
+    }
+    
+    .btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .features {
+      text-align: left;
+      margin: 25px 0;
+      padding-left: 20px;
+    }
+    
+    .features h3 {
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .features li {
+      margin-bottom: 10px;
+      position: relative;
+      list-style-type: none;
+      padding-left: 25px;
+    }
+    
+    .features li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    
+    footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    .process-steps {
+      counter-reset: step;
+      padding-left: 5px;
+    }
+    
+    .process-steps li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 35px;
+      list-style: none;
+    }
+    
+    .process-steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: var(--primary);
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
       font-weight: bold;
     }
-    footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #ddd;
+    
+    /* Tambahan untuk fallback */
+    .fallback-container {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8e1;
+      border-radius: 10px;
+      border-left: 4px solid var(--warning);
+    }
+    
+    .fallback-link {
+      word-break: break-all;
+      color: var(--primary);
+      font-weight: 500;
     }
   </style>
-  <script>
-    function donasi(nominal, paket) {
-      const tg = window.Telegram?.WebApp;
-      const username = tg?.initDataUnsafe?.user?.username || "pengguna";
-      const url = `https://saweria.co/IDMworkbot?nominal=${nominal}&message=Upgrade%20(${paket})%20dari%20@${username}`;
-      window.location.href = url;
-    }
-  </script>
 </head>
 <body>
   <div class="container">
-    <h2>Pilih Paket Upgrade</h2>
-    <button class="btn" onclick="donasi(10000, 'Premium 20 hari')">Rp10.000 - Premium 20 Hari</button>
-    <button class="btn" onclick="donasi(15000, 'Premium 30 hari')">Rp15.000 - Premium 30 Hari</button>
-    <button class="btn" onclick="donasi(25000, 'Premium 40 hari')">Rp25.000 - Premium 40 Hari</button>
-    <button class="btn" onclick="donasi(50000, 'Premium 90 hari')">Rp50.000 - Premium 90 Hari</button>
-
-    <div class="info">
-      <h3>Langkah Terakhir!</h3>
-      Setelah pembayaran selesai, <strong>WAJIB kirim bukti transfer ke bot</strong> agar akunmu langsung diaktifkan otomatis.<br><br>
-      <a href="https://t.me/IDMwork_bot" target="_blank">Kirim Bukti ke Bot Sekarang</a><br><br>
-      Terima kasih banyak telah mendukung IDMwork Bot!
+    <h2><span class="emoji">🚀</span> Upgrade Premium IDMwork Bot</h2>
+    
+    <div class="package-container">
+      <button class="btn-package" data-nominal="10000" data-paket="Premium 20 hari">
+        <span>Rp10.000 - Premium 20 Hari</span>
+        <span class="price-per-day">(Hanya Rp500/hari)</span>
+      </button>
+      
+      <button class="btn-package best-value" data-nominal="15000" data-paket="Premium 30 hari">
+        <span>Rp15.000 - Premium 30 Hari</span>
+        <span class="price-per-day">(Hanya Rp500/hari)</span>
+      </button>
+      
+      <button class="btn-package" data-nominal="25000" data-paket="Premium 40 hari">
+        <span>Rp25.000 - Premium 40 Hari</span>
+        <span class="price-per-day">(Rp625/hari)</span>
+      </button>
+      
+      <button class="btn-package" data-nominal="50000" data-paket="Premium 90 hari">
+        <span>Rp50.000 - Premium 90 Hari</span>
+        <span class="price-per-day">(Rp555/hari)</span>
+      </button>
+    </div>
+    
+    <div class="features">
+      <h3><span class="emoji">✨</span> Keuntungan Premium:</h3>
+      <li>Akses penuh semua fitur bot</li>
+      <li>Prioritas tinggi dalam antrian</li>
+      <li>Dukungan pelanggan prioritas</li>
+      <li>Masa aktif sesuai paket pilihan</li>
+    </div>
+    
+    <div class="info-box">
+      <h3><span class="emoji">📝</span> Cara Upgrade:</h3>
+      <ol class="process-steps">
+        <li>Pilih paket premium yang diinginkan</li>
+        <li>Lakukan pembayaran via metode yang tersedia</li>
+        <li>Kirim bukti transfer ke @IDMwork_bot</li>
+        <li>Tunggu verifikasi admin (1x24 jam)</li>
+      </ol>
+      
+      <p style="margin: 18px 0 10px; font-weight: 500;">
+        <strong>PENTING:</strong> Setelah pembayaran, segera kirim bukti transfer ke bot dan tunggu verifikasi oleh admin maksimal 1x24 jam.
+      </p>
+      
+      <p class="note">
+        <strong>Catatan:</strong> Pastikan bukti transfer jelas terbaca dan valid. Proses mungkin lebih cepat tergantung waktu pengiriman.
+      </p>
+      
+      <a href="https://t.me/IDMwork_bot" target="_blank" class="btn-confirm">
+        <span class="emoji">📤</span> Kirim Bukti ke Bot Sekarang
+      </a>
+    </div>
+    
+    <!-- Fallback untuk redirect gagal -->
+    <div id="fallback-container" class="fallback-container">
+      <h4><span class="emoji">⚠️</span> Redirect Gagal</h4>
+      <p>Silakan klik link berikut untuk melanjutkan pembayaran:</p>
+      <a id="fallback-link" class="fallback-link" target="_blank"></a>
+      <p class="note">Atau salin dan buka di browser Anda</p>
     </div>
   </div>
 
   <footer>
-    &copy; 2025 IDMwork_bot | All Rights Reserved
+    &copy; 2025 IDMwork_bot | Layanan Premium Resmi<br>
+    <small>Bot tidak berafiliasi dengan pihak ketiga</small>
   </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Simpan HTML asli tombol
+      document.querySelectorAll('.btn-package').forEach(btn => {
+        btn.setAttribute('data-original', btn.innerHTML);
+      });
+      
+      // Event listener untuk semua tombol
+      document.querySelectorAll('.btn-package').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const nominal = this.getAttribute('data-nominal');
+          const paket = this.getAttribute('data-paket');
+          processDonasi(nominal, paket, this);
+        });
+      });
+    });
+    
+    function processDonasi(nominal, paket, buttonElement) {
+      // Tampilkan loading
+      const buttons = document.querySelectorAll('.btn-package');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+      });
+      
+      buttonElement.innerHTML = `Memproses... <span class="loading"></span>`;
+      
+      // Format URL dengan benar
+      const tg = window.Telegram?.WebApp;
+      const username = tg?.initDataUnsafe?.user?.username || "pengguna";
+      const baseUrl = "https://saweria.co/IDMworkbot";
+      
+      // Gunakan URLSearchParams untuk encoding yang benar
+      const params = new URLSearchParams();
+      params.append('nominal', nominal);
+      params.append('message', `Upgrade ${paket} dari @${username}`);
+      
+      const url = `${baseUrl}?${params.toString()}`;
+      console.log('Redirect URL:', url); // Untuk debugging
+      
+      // Coba berbagai metode redirect
+      let redirectSuccess = false;
+      
+      // Method 1: Buka tab baru (utama)
+      try {
+        const newWindow = window.open(url, '_blank');
+        if (newWindow && !newWindow.closed) {
+          redirectSuccess = true;
+        }
+      } catch (e) {
+        console.log('Method 1 failed:', e);
+      }
+      
+      // Method 2: Jika di Telegram WebApp
+      if (!redirectSuccess && window.Telegram?.WebApp) {
+        try {
+          window.Telegram.WebApp.openLink(url);
+          redirectSuccess = true;
+        } catch (e) {
+          console.log('Method 2 failed:', e);
+        }
+      }
+      
+      // Method 3: Fallback ke location.href
+      if (!redirectSuccess) {
+        setTimeout(() => {
+          window.location.href = url;
+        }, 300);
+      }
+      
+      // Tampilkan fallback jika semua metode gagal
+      setTimeout(() => {
+        if (!redirectSuccess) {
+          document.getElementById('fallback-link').href = url;
+          document.getElementById('fallback-link').textContent = url;
+          document.getElementById('fallback-container').style.display = 'block';
+        }
+      }, 2000);
+      
+      // Reset tombol setelah 5 detik
+      setTimeout(() => {
+        buttons.forEach(btn => {
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          btn.innerHTML = btn.getAttribute('data-original');
+        });
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
