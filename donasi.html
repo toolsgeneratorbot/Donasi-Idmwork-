@@ -43,10 +43,24 @@
     .info {
       margin-top: 20px;
       font-size: 15px;
-      color: #444;
-      background-color: #f5f5f5;
+      background-color: #ffe5e5;
       padding: 15px;
       border-radius: 10px;
+      border-left: 5px solid red;
+      color: #222;
+    }
+    .info h3 {
+      color: #c00;
+      margin-top: 0;
+    }
+    .info a {
+      display: inline-block;
+      background-color: #0088cc;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
     }
     footer {
       margin-top: 30px;
@@ -66,15 +80,16 @@
 <body>
   <div class="container">
     <h2>Pilih Paket Upgrade</h2>
-    <button class="btn" onclick="donasi(10000, 'Premium 10 hari')">Rp10.000 - Premium 20 Hari</button>
-    <button class="btn" onclick="donasi(15000, 'Premium 15 hari')">Rp15.000 - premium 30 Hari</button>
-    <button class="btn" onclick="donasi(25000, 'Premium 30 hari')">Rp25.000 - Premium 40 Hari</button>
-    <button class="btn" onclick="donasi(50000, 'Premium 60 hari')">Rp50.000 - Premium 90 Hari</button>
+    <button class="btn" onclick="donasi(10000, 'Premium 20 hari')">Rp10.000 - Premium 20 Hari</button>
+    <button class="btn" onclick="donasi(15000, 'Premium 30 hari')">Rp15.000 - Premium 30 Hari</button>
+    <button class="btn" onclick="donasi(25000, 'Premium 40 hari')">Rp25.000 - Premium 40 Hari</button>
+    <button class="btn" onclick="donasi(50000, 'Premium 90 hari')">Rp50.000 - Premium 90 Hari</button>
 
     <div class="info">
-      Setelah memilih paket, kamu akan diarahkan ke halaman pembayaran Saweria.<br><br>
-      Setelah melakukan pembayaran, silakan <strong>kirim bukti transfer ke bot</strong> untuk diproses otomatis oleh sistem kami.<br><br>
-      Terima kasih telah mendukung layanan IDMwork_bot!
+      <h3>Langkah Terakhir!</h3>
+      Setelah pembayaran selesai, <strong>WAJIB kirim bukti transfer ke bot</strong> agar akunmu langsung diaktifkan otomatis.<br><br>
+      <a href="https://t.me/IDMwork_bot" target="_blank">Kirim Bukti ke Bot Sekarang</a><br><br>
+      Terima kasih banyak telah mendukung IDMwork Bot!
     </div>
   </div>
 
