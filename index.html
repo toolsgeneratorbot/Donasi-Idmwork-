@@ -4,66 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upgrade Premium IDMwork_bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #0066cc, #003366);
+            background: linear-gradient(135deg, #004b8d, #001f3f);
             padding: 20px;
             color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0;
         }
+        
         .container {
             background: white;
-            color: #333;
+            color: var(--dark);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            margin: auto;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
+        
         .logo {
             width: 180px;
+            height: auto;
             margin-bottom: 20px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        
         h1 {
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 700;
         }
+        
         .desc {
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #555;
         }
+        
+        .features {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .features li {
+            margin-bottom: 10px;
+            position: relative;
+            list-style-type: none;
+            padding-left: 25px;
+        }
+        
+        .features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
         .donasi-btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #007bff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             font-size: 18px;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            border: none;
+            cursor: pointer;
         }
+        
         .donasi-btn:hover {
-            background: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
+        
+        .donasi-btn:active {
+            transform: translateY(1px);
+        }
+        
         footer {
             margin-top: 30px;
             font-size: 14px;
-            color: #ddd;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="file_00000000204461f79ec586db18505df6_conversation_id=6800a65b-4d44-8003-a4da-e0185b59a9f2&message_id=0948239a-fbd0-4182-879e-698649006aad.png" alt="Logo IDMwork bot" class="logo">
-        <h1>Selamat Datang di Web Upgrade Premium IDMwork_bot</h1>
-        <p class="desc">Silakan klik tombol di bawah untuk melakukan Upgrade Premium dan mendukung layanan kami.</p>
-        <a href="donasi.html" class="donasi-btn"><i class="fas fa-hand-holding-heart"></i> Upgrade Sekarang</a>
+        <h1><span class="emoji">🚀</span> Upgrade Premium IDMwork Bot</h1>
+        <p class="desc">Tingkatkan pengalaman Anda dengan fitur premium untuk akses penuh semua kemampuan bot kami.</p>
+        
+        <div class="features">
+            <h3><span class="emoji">✨</span> Keuntungan Premium:</h3>
+            <li>Akses penuh semua fitur bot</li>
+            <li>Prioritas tinggi dalam antrian</li>
+            <li>Dukungan pelanggan prioritas</li>
+            <li>Masa aktif sesuai paket pilihan</li>
+        </div>
+        
+        <a href="donasi.html" class="donasi-btn">
+            <i class="fas fa-crown"></i> Upgrade Sekarang
+        </a>
+        
+        <p class="note" style="font-size:13px;color:#666;">
+            Proses cepat dan mudah. Aktif dalam 1x24 jam setelah verifikasi.
+        </p>
     </div>
+    
     <footer>
-        &copy; 2025 IDMwork_bot | All Rights Reserved
+        &copy; 2025 IDMwork_bot | Layanan Premium Resmi<br>
+        <small>Bot tidak berafiliasi dengan pihak ketiga</small>
     </footer>
 </body>
 </html>
