@@ -10,18 +10,24 @@
       --primary: #4361ee;
       --secondary: #3a0ca3;
       --accent: #f72585;
+      --accent2: #b5179e;
       --success: #4cc9f0;
       --warning: #f8961e;
       --light: #f8f9fa;
       --dark: #212529;
     }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      text-align: center;
       background: linear-gradient(135deg, #004b8d, #001f3f);
-      padding: 20px;
       color: white;
+      padding: 20px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -33,66 +39,28 @@
       color: var(--dark);
       padding: 30px;
       border-radius: 15px;
-      max-width: 450px;
-      margin: 20px auto;
+      max-width: 480px;
+      margin: 0 auto;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
-      margin-bottom: 25px;
+      margin-bottom: 15px;
       color: var(--secondary);
       font-weight: 700;
       font-size: 1.8rem;
-    }
-
-    .info-box {
-      margin-top: 30px;
-      font-size: 15px;
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 5px solid var(--success);
-      color: var(--dark);
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    .info-box h3 {
-      color: var(--secondary);
-      margin-top: 0;
-      font-weight: 600;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-confirm {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--accent), #b5179e);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      margin: 15px 0 5px;
-      transition: all 0.3s;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      width: 100%;
       text-align: center;
-    }
-
-    .btn-confirm:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     .features {
       text-align: left;
-      margin: 25px 0;
+      margin: 20px 0;
       padding-left: 20px;
     }
 
@@ -100,55 +68,50 @@
       color: var(--secondary);
       font-weight: 600;
       font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .features li {
+      list-style: none;
       margin-bottom: 10px;
       position: relative;
-      list-style-type: none;
-      padding-left: 25px;
+      padding-left: 28px;
     }
 
     .features li::before {
       content: "\2713";
-      color: var(--success);
-      font-weight: bold;
       position: absolute;
       left: 0;
+      color: var(--success);
     }
 
-    footer {
+    .info-box {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 5px solid var(--success);
+      color: var(--dark);
       margin-top: 20px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.5;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
 
-    .note {
-      font-size: 13px;
-      color: #666;
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-    .emoji {
-      font-size: 1.2em;
+    .info-box h3 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
     }
 
     .process-steps {
       counter-reset: step;
-      padding-left: 5px;
+      padding-left: 0;
+      margin-bottom: 20px;
     }
 
     .process-steps li {
-      margin-bottom: 12px;
-      position: relative;
-      padding-left: 35px;
       list-style: none;
+      margin-bottom: 12px;
+      padding-left: 36px;
+      position: relative;
     }
 
     .process-steps li::before {
@@ -159,54 +122,91 @@
       top: 0;
       background: var(--primary);
       color: white;
-      width: 25px;
-      height: 25px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
     }
+
+    .btn-confirm {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      color: white;
+    }
+
+    .btn-donasi {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    .btn-bukti {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 15px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
-    <h2><span class="emoji">🚀</span> Upgrade Premium IDMwork Bot</h2>
+    <h2>⚠️Limit Habis? Mau Akses Penuh Bot? Upgrade Sekarang!</h2>
 
     <div class="features">
-      <h3><span class="emoji">✨</span> Keuntungan Premium:</h3>
-      <li>Akses penuh semua fitur bot</li>
-      <li>Prioritas tinggi dalam antrian</li>
-      <li>Dukungan pelanggan prioritas</li>
+      <h3>✨ Keuntungan Premium:</h3>
+      <ul>
+        <li>⚡ Semua fitur bot aktif 100%</li>
+        <li>🚀 Proses lebih cepat tanpa delay</li>
+        <li>🤖 Tanpa batasan Limit </li>
+      </ul>
     </div>
 
     <div class="info-box">
-      <h3><span class="emoji">📝</span> Cara Upgrade:</h3>
+      <h3>📝 Cara Upgrade:</h3>
       <ol class="process-steps">
-        <li>Donasi minimal Rp 5.000</li>
-        <li>Lakukan pembayaran via metode yang tersedia</li>
+        <li>Lakukan donasi sesuai nominal yang kamu inginkan</li>
+        <li>Gunakan metode pembayaran yang tersedia</li>
         <li>Kirim bukti transfer ke @IDMwork_bot</li>
         <li>Tunggu verifikasi admin (maksimal 1x24 jam)</li>
       </ol>
 
-      <a href="https://saweria.co/IDMworkbot" target="_blank" class="btn-confirm">
-        <span class="emoji">💸</span> Donasi via Saweria
-      </a>
+      <a href="https://saweria.co/IDMworkbot" target="_blank" class="btn-confirm btn-donasi">💸 Donasi via Saweria</a>
+      <a href="https://t.me/IDMwork_bot" target="_blank" class="btn-confirm btn-bukti">📤 Kirim Bukti ke Bot Sekarang</a>
 
-      <a href="https://t.me/IDMwork_bot" target="_blank" class="btn-confirm">
-        <span class="emoji">📤</span> Kirim Bukti ke Bot Sekarang
-      </a>
-
-      <p class="note">
-        <strong>Catatan:</strong> Pastikan bukti transfer jelas terbaca dan valid. Proses bisa lebih cepat tergantung waktu pengiriman.
-      </p>
+      <div class="note"><strong>Catatan:</strong> Proses verifikasi tergantung waktu pengiriman bukti transfer.</div>
     </div>
   </div>
 
   <footer>
     &copy; 2025 IDMwork_bot | Layanan Premium Resmi<br>
-    <small>Bot tidak berafiliasi dengan pihak ketiga</small>
+    <small>Bot ini tidak berafiliasi dengan pihak ketiga mana pun</small>
   </footer>
 </body>
 </html>
