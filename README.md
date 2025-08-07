@@ -1,1 +1,1 @@
-# Upgrade Premium IDMwork bot
+# Upgrade Premium ToolsGenerator_bot
