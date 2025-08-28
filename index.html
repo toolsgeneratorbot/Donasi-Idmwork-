@@ -80,64 +80,106 @@
       100% { transform: translateY(-120vh) translateX(10vw); opacity: 0; }
     }
 
-    /* ========= Preloader premium ========= */
+    /* ========= Enhanced Preloader ========= */
     #preloader {
-      position: fixed; inset: 0;
+      position: fixed; 
+      inset: 0;
       background: #0b1225;
       display: grid;
       place-items: center;
       z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
     }
+    
     .pre-box {
-      display: grid; place-items: center; gap: 16px;
+      display: grid; 
+      place-items: center; 
+      gap: 16px;
+      text-align: center;
     }
-    .pre-ring {
-      width: 96px; height: 96px;
-      border-radius: 999px;
-      border: 2px dashed rgba(255,255,255,.2);
+    
+    .pre-icon-container {
       position: relative;
-      animation: spin 1.4s linear infinite;
+      width: 120px;
+      height: 120px;
     }
-    .pre-core {
-      position: absolute; inset: 0;
-      margin: auto; width: 72px; height: 72px;
-      border-radius: 999px;
-      background: radial-gradient(closest-side, rgba(67,97,238,.35), transparent);
-      filter: blur(2px);
+    
+    .pre-icon-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(67, 97, 238, 0.6);
+      animation: pulse 2s infinite;
     }
+    
     .pre-icon {
-      position: absolute; inset: 0; display: grid; place-items: center;
-      color: var(--primary); font-size: 40px;
-      text-shadow: 0 6px 18px rgba(67,97,238,.5);
-      animation: pulse 1.6s ease-in-out infinite;
+      color: white; 
+      font-size: 50px;
+      animation: rotate 4s linear infinite;
     }
+    
     .pre-text {
-      font-weight: 600; letter-spacing: .12em;
-      color: var(--text-light); opacity: .8;
+      font-weight: 600; 
+      letter-spacing: .12em;
+      color: var(--text-light); 
+      opacity: .8;
       animation: updown 1.8s ease-in-out infinite;
+      font-size: 1.2rem;
+      margin-top: 10px;
     }
+    
+    .pre-subtext {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: -5px;
+      opacity: 0.7;
+    }
+    
     .pre-progress {
-      width: 220px; height: 6px; border-radius: 999px;
-      background: rgba(255,255,255,.08); overflow: hidden;
+      width: 220px; 
+      height: 6px; 
+      border-radius: 999px;
+      background: rgba(255,255,255,.08); 
+      overflow: hidden;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      margin-top: 15px;
     }
+    
     .pre-bar {
-      width: 0%; height: 100%;
+      width: 0%; 
+      height: 100%;
       background: linear-gradient(90deg, #3a0ca3, #4361ee, #4cc9f0);
       border-radius: inherit;
       transition: width .25s ease;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1;} 50% { transform: scale(1.12); opacity: .85;} }
-    @keyframes updown { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-6px);} }
+    @keyframes pulse { 
+      0% { transform: scale(1); box-shadow: 0 0 40px rgba(67, 97, 238, 0.6); }
+      50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(67, 97, 238, 0.8); }
+      100% { transform: scale(1); box-shadow: 0 0 40px rgba(67, 97, 238, 0.6); }
+    }
+    
+    @keyframes rotate { 
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes updown { 
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
 
     /* Sembunyikan preloader saat siap */
     body.loaded #preloader {
-      opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s ease;
+      opacity: 0; 
+      visibility: hidden; 
     }
 
-    /* ========= Konten utama (tetap desain asli) ========= */
+    /* ========= Konten utama ========= */
     .container {
       backdrop-filter: blur(12px);
       background: var(--card-bg);
@@ -149,122 +191,239 @@
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       margin: 20px auto;
       text-align: center;
-
-      /* muncul setelah preloader */
-      opacity: 0; transform: translateY(16px);
-      transition: opacity .8s ease, transform .8s ease;
+      opacity: 0; 
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    body.loaded .container { opacity: 1; transform: translateY(0); }
+    
+    body.loaded .container { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
 
     .logo {
-      width: 90px; height: 90px;
+      width: 90px; 
+      height: 90px;
       background: linear-gradient(135deg, var(--primary), var(--accent));
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
       margin: 0 auto 20px;
       box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
     }
-    .logo i { font-size: 40px; color: white; }
+    
+    .logo i { 
+      font-size: 40px; 
+      color: white; 
+    }
 
-    h1 { font-weight: 700; font-size: 1.9rem; margin-bottom: 10px; color: var(--success); }
-    .subtitle { color: var(--text-light); font-size: 1rem; margin-bottom: 25px; }
+    h1 { 
+      font-weight: 700; 
+      font-size: 1.9rem; 
+      margin-bottom: 10px; 
+      color: var(--success); 
+    }
+    
+    .subtitle { 
+      color: var(--text-light); 
+      font-size: 1rem; 
+      margin-bottom: 25px; 
+    }
 
     .saweria-card {
       background: linear-gradient(135deg, #ff7b54, #ff5e7d);
-      color: white; padding: 25px; border-radius: 15px;
-      margin: 25px 0; box-shadow: 0 10px 30px rgba(255, 94, 125, 0.35);
+      color: white; 
+      padding: 25px; 
+      border-radius: 15px;
+      margin: 25px 0; 
+      box-shadow: 0 10px 30px rgba(255, 94, 125, 0.35);
     }
+    
     .saweria-card h2 {
-      font-size: 1.4rem; margin-bottom: 12px;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 1.4rem; 
+      margin-bottom: 12px;
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 10px;
     }
 
     .btn-donasi, .btn-telegram {
       display: inline-block;
       border-radius: 50px;
-      font-weight: 600; text-decoration: none;
+      font-weight: 600; 
+      text-decoration: none;
       transition: transform .28s ease, box-shadow .28s ease;
-      position: relative; overflow: hidden;
-      isolation: isolate; /* supaya ripple di atas */
+      position: relative; 
+      overflow: hidden;
     }
+    
     .btn-donasi {
       background: linear-gradient(135deg, #ffffff, #e2e8f0);
-      color: #ff4d6d; padding: 13px 28px;
+      color: #ff4d6d; 
+      padding: 13px 28px;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
       margin-top: 10px;
     }
+    
     .btn-telegram {
       background: linear-gradient(135deg, #3a0ca3, #4361ee);
-      color: white !important; padding: 14px 32px;
+      color: white !important; 
+      padding: 14px 32px;
       box-shadow: 0 6px 20px rgba(67,97,238,0.35);
       margin-top: 20px;
     }
-    .btn-donasi:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 26px rgba(0,0,0,.35); }
-    .btn-telegram:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px rgba(67,97,238,.55); }
+    
+    .btn-donasi:hover { 
+      transform: translateY(-2px) scale(1.02); 
+      box-shadow: 0 10px 26px rgba(0,0,0,.35); 
+    }
+    
+    .btn-telegram:hover { 
+      transform: translateY(-2px) scale(1.03); 
+      box-shadow: 0 12px 32px rgba(67,97,238,.55); 
+    }
 
     /* Ripple effect */
     .ripple {
-      position: absolute; border-radius: 50%;
+      position: absolute; 
+      border-radius: 50%;
       transform: translate(-50%, -50%) scale(0);
       animation: ripple .6s ease-out forwards;
       background: rgba(255,255,255,.5);
-      pointer-events: none; mix-blend-mode: screen;
+      pointer-events: none; 
     }
+    
     @keyframes ripple {
-      to { transform: translate(-50%, -50%) scale(12); opacity: 0; }
+      to { 
+        transform: translate(-50%, -50%) scale(12); 
+        opacity: 0; 
+      }
     }
 
     .features h2, .info-box h2 {
-      font-size: 1.3rem; margin-bottom: 15px; text-align: center; color: var(--success);
+      font-size: 1.3rem; 
+      margin-bottom: 15px; 
+      text-align: center; 
+      color: var(--success);
     }
-    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
-    @media (max-width: 480px) { .feature-grid { grid-template-columns: 1fr; } }
+    
+    .feature-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 15px; 
+      margin-top: 15px; 
+    }
+    
+    @media (max-width: 480px) { 
+      .feature-grid { 
+        grid-template-columns: 1fr; 
+      } 
+    }
 
     .feature-item {
       background: rgba(255,255,255,0.05);
-      padding: 18px; border-radius: 12px; text-align: center;
+      padding: 18px; 
+      border-radius: 12px; 
+      text-align: center;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: transform .3s ease, box-shadow .3s ease, opacity .6s ease;
-      /* reveal awal */
-      opacity: 0; transform: translateY(12px) scale(.98);
+      transition: transform .3s ease, box-shadow .3s ease;
     }
-    .feature-item:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 10px 22px rgba(0,0,0,.25); }
-    .feature-item.in-view { opacity: 1; transform: translateY(0) scale(1); }
-
-    .feature-icon { font-size: 26px; margin-bottom: 10px; color: var(--primary); }
-    .feature-text { font-size: 0.9rem; color: var(--text-light); }
+    
+    .feature-item:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 10px 22px rgba(0,0,0,.25); 
+    }
+    
+    .feature-icon { 
+      font-size: 26px; 
+      margin-bottom: 10px; 
+      color: var(--primary); 
+    }
+    
+    .feature-text { 
+      font-size: 0.9rem; 
+      color: var(--text-light); 
+    }
 
     .info-box {
       background: rgba(255,255,255,0.05);
-      padding: 20px; border-radius: 15px; margin: 25px 0;
+      padding: 20px; 
+      border-radius: 15px; 
+      margin: 25px 0;
       border: 1px solid rgba(255,255,255,0.08);
       text-align: left;
     }
 
-    .steps { counter-reset: step; }
-    .step {
-      list-style: none; margin-bottom: 14px; padding-left: 42px; position: relative; color: var(--text-light);
+    .steps { 
+      counter-reset: step; 
     }
+    
+    .step {
+      list-style: none; 
+      margin-bottom: 14px; 
+      padding-left: 42px; 
+      position: relative; 
+      color: var(--text-light);
+    }
+    
     .step::before {
-      counter-increment: step; content: counter(step);
-      position: absolute; left: 0; top: 0;
-      background: var(--accent); color: white;
-      width: 28px; height: 28px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: bold;
+      counter-increment: step; 
+      content: counter(step);
+      position: absolute; 
+      left: 0; 
+      top: 0;
+      background: var(--accent); 
+      color: white;
+      width: 28px; 
+      height: 28px; 
+      border-radius: 50%;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      font-size: 13px; 
+      font-weight: bold;
       box-shadow: 0 4px 12px rgba(114,9,183,.35);
     }
 
-    .note { font-size: 0.85rem; color: var(--text-light); margin-top: 15px; text-align: center; line-height: 1.6; }
-    footer { margin-top: 25px; font-size: 0.8rem; color: rgba(255,255,255,0.6); text-align: center; max-width: 650px; }
+    .note { 
+      font-size: 0.85rem; 
+      color: var(--text-light); 
+      margin-top: 15px; 
+      text-align: center; 
+      line-height: 1.6; 
+    }
+    
+    footer { 
+      margin-top: 25px; 
+      font-size: 0.8rem; 
+      color: rgba(255,255,255,0.6); 
+      text-align: center; 
+      max-width: 650px; 
+    }
 
-    .heart { color: #ff6b6b; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    .heart { 
+      color: #ff6b6b; 
+      animation: pulse 1.5s infinite; 
+    }
+    
+    @keyframes pulse { 
+      0% { transform: scale(1); } 
+      50% { transform: scale(1.15); } 
+      100% { transform: scale(1); } 
+    }
 
     /* ===== Aksesibilitas: kurangi animasi bila user minta ===== */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .particle { display: none; }
+      *, *::before, *::after { 
+        animation: none !important; 
+        transition: none !important; 
+      }
+      
+      .particle { 
+        display: none; 
+      }
     }
   </style>
 </head>
@@ -273,19 +432,23 @@
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="particles" id="particles" aria-hidden="true"></div>
 
-  <!-- Preloader -->
+  <!-- Enhanced Preloader -->
   <div id="preloader" role="status" aria-live="polite" aria-label="Memuat">
     <div class="pre-box">
-      <div class="pre-ring">
-        <div class="pre-core"></div>
-        <div class="pre-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+      <div class="pre-icon-container">
+        <div class="pre-icon-circle">
+          <i class="fas fa-robot pre-icon" aria-hidden="true"></i>
+        </div>
       </div>
-      <div class="pre-text">Memuat...</div>
-      <div class="pre-progress" aria-hidden="true"><div class="pre-bar" id="preBar"></div></div>
+      <div class="pre-text">ToolsGenerator Bot</div>
+      <div class="pre-subtext">Sedang memuat...</div>
+      <div class="pre-progress" aria-hidden="true">
+        <div class="pre-bar" id="preBar"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Main Content (tetap desain & isi aslinya) -->
+  <!-- Main Content -->
   <div class="container">
     <div class="header">
       <div class="logo">
@@ -372,7 +535,8 @@
         const accelerate = setInterval(() => {
           progress += 5;
           if (progress >= 100) {
-            progress = 100; clearInterval(accelerate);
+            progress = 100; 
+            clearInterval(accelerate);
             document.body.classList.add('loaded');
           }
           preBar.style.width = progress + '%';
@@ -398,27 +562,6 @@
         p.style.animationDelay = (-Math.random() * 20) + 's';
         wrap.appendChild(p);
       }
-    })();
-
-    // ===== Reveal bertahap untuk feature-item
-    (function () {
-      const items = document.querySelectorAll('.feature-item');
-      if (!('IntersectionObserver' in window) || !items.length) {
-        items.forEach(el => el.classList.add('in-view'));
-        return;
-      }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      items.forEach((el, idx) => {
-        el.style.transitionDelay = (idx * 90) + 'ms';
-        io.observe(el);
-      });
     })();
 
     // ===== Ripple effect pada semua tombol
