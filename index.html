@@ -80,7 +80,7 @@
       100% { transform: translateY(-120vh) translateX(10vw); opacity: 0; }
     }
 
-    /* ========= Enhanced Preloader ========= */
+    /* ========= Preloader Premium yang Diperbaiki ========= */
     #preloader {
       position: fixed; 
       inset: 0;
@@ -94,32 +94,42 @@
     .pre-box {
       display: grid; 
       place-items: center; 
-      gap: 16px;
+      gap: 20px;
       text-align: center;
     }
     
-    .pre-icon-container {
+    .pre-loader {
       position: relative;
       width: 120px;
       height: 120px;
     }
     
-    .pre-icon-circle {
+    .pre-loader-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
+      border: 3px solid transparent;
+      border-top: 3px solid var(--primary);
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 40px rgba(67, 97, 238, 0.6);
-      animation: pulse 2s infinite;
+      animation: spin 1.5s linear infinite;
+    }
+    
+    .pre-loader-inner:nth-child(2) {
+      border: 3px solid transparent;
+      border-bottom: 3px solid var(--accent);
+      animation: spinReverse 1.8s linear infinite;
     }
     
     .pre-icon {
-      color: white; 
-      font-size: 50px;
-      animation: rotate 4s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--success);
+      font-size: 40px;
+      animation: pulse 2s ease-in-out infinite;
     }
     
     .pre-text {
@@ -129,24 +139,23 @@
       opacity: .8;
       animation: updown 1.8s ease-in-out infinite;
       font-size: 1.2rem;
-      margin-top: 10px;
     }
     
     .pre-subtext {
       color: var(--text-light);
       font-size: 0.9rem;
-      margin-top: -5px;
+      margin-top: -15px;
       opacity: 0.7;
     }
     
     .pre-progress {
-      width: 220px; 
-      height: 6px; 
-      border-radius: 999px;
+      width: 240px; 
+      height: 8px; 
+      border-radius: 10px;
       background: rgba(255,255,255,.08); 
       overflow: hidden;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-      margin-top: 15px;
+      margin-top: 10px;
     }
     
     .pre-bar {
@@ -154,23 +163,45 @@
       height: 100%;
       background: linear-gradient(90deg, #3a0ca3, #4361ee, #4cc9f0);
       border-radius: inherit;
-      transition: width .25s ease;
-    }
-
-    @keyframes pulse { 
-      0% { transform: scale(1); box-shadow: 0 0 40px rgba(67, 97, 238, 0.6); }
-      50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(67, 97, 238, 0.8); }
-      100% { transform: scale(1); box-shadow: 0 0 40px rgba(67, 97, 238, 0.6); }
+      transition: width 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
-    @keyframes rotate { 
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .pre-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes spin { 
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); } 
+    }
+    
+    @keyframes spinReverse { 
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); } 
+    }
+    
+    @keyframes pulse { 
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 
+      50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; } 
     }
     
     @keyframes updown { 
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      0%, 100% { transform: translateY(0); } 
+      50% { transform: translateY(-5px); } 
+    }
+    
+    @keyframes shimmer {
+      0% { left: -50px; }
+      100% { left: calc(100% + 50px); }
     }
 
     /* Sembunyikan preloader saat siap */
@@ -191,6 +222,8 @@
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       margin: 20px auto;
       text-align: center;
+
+      /* muncul setelah preloader */
       opacity: 0; 
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -322,29 +355,59 @@
       } 
     }
 
+    /* Animasi untuk feature items */
     .feature-item {
       background: rgba(255,255,255,0.05);
       padding: 18px; 
       border-radius: 12px; 
       text-align: center;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: transform .3s ease, box-shadow .3s ease;
+      transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
+      /* reveal awal */
+      opacity: 0; 
+      transform: translateY(20px);
+      animation: featureReveal 0.6s ease forwards;
+    }
+    
+    .feature-item:nth-child(1) { animation-delay: 0.1s; }
+    .feature-item:nth-child(2) { animation-delay: 0.2s; }
+    .feature-item:nth-child(3) { animation-delay: 0.3s; }
+    .feature-item:nth-child(4) { animation-delay: 0.4s; }
+    
+    @keyframes featureReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .feature-item:hover { 
-      transform: translateY(-5px); 
-      box-shadow: 0 10px 22px rgba(0,0,0,.25); 
+      transform: translateY(-5px) scale(1.02); 
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+      background: rgba(255,255,255,0.08);
     }
     
     .feature-icon { 
       font-size: 26px; 
       margin-bottom: 10px; 
-      color: var(--primary); 
+      color: var(--primary);
+      display: inline-block;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    
+    .feature-item:hover .feature-icon {
+      transform: scale(1.2) rotate(5deg);
+      color: var(--success);
     }
     
     .feature-text { 
       font-size: 0.9rem; 
-      color: var(--text-light); 
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+    
+    .feature-item:hover .feature-text {
+      color: var(--text-dark);
     }
 
     .info-box {
@@ -432,13 +495,13 @@
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="particles" id="particles" aria-hidden="true"></div>
 
-  <!-- Enhanced Preloader -->
+  <!-- Preloader yang Diperbaiki -->
   <div id="preloader" role="status" aria-live="polite" aria-label="Memuat">
     <div class="pre-box">
-      <div class="pre-icon-container">
-        <div class="pre-icon-circle">
-          <i class="fas fa-robot pre-icon" aria-hidden="true"></i>
-        </div>
+      <div class="pre-loader">
+        <div class="pre-loader-inner"></div>
+        <div class="pre-loader-inner"></div>
+        <div class="pre-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
       </div>
       <div class="pre-text">ToolsGenerator Bot</div>
       <div class="pre-subtext">Sedang memuat...</div>
@@ -492,7 +555,7 @@
       <h2>Cara Berdonasi</h2>
       <ol class="steps">
         <li class="step">Klik tombol "Kunjungi Saweria" di atas</li>
-        <li class="step">Pilih nominal donasi yang Anda inginkan</li>
+        <div class="step">Pilih nominal donasi yang Anda inginkan</div>
         <li class="step">Lakukan pembayaran melalui metode yang tersedia</li>
         <li class="step">Kirim bukti transfer ke bot untuk verifikasi</li>
       </ol>
