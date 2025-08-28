@@ -3,88 +3,161 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dukung Kami - ToolsGenerator Bot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Dukung Kami - ToolsGenerator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     :root {
-      --primary: #4361ee;
-      --secondary: #3a0ca3;
-      --accent: #7209b7;
-      --light: #f8f9fa;
-      --dark: #0f172a;
-      --success: #4cc9f0;
-      --card-bg: rgba(255, 255, 255, 0.08);
-      --text-dark: #f1f5f9;
-      --text-light: #cbd5e1;
+      --primary: #00ff41;
+      --primary-dark: #00cc33;
+      --accent: #00b3ff;
+      --accent2: #ff0080;
+      --success: #00ff9d;
+      --light: #0a0a0a;
+      --dark: #000000;
+      --card-bg: rgba(0, 20, 10, 0.8);
+      --text-dark: #00ff41;
+      --text-light: #00cc88;
+      --gradient: linear-gradient(135deg, #00ff41, #00b3ff, #ff0080);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e1b4b, #3b0764);
+      font-family: 'Rajdhani', sans-serif;
+      background: #000000;
+      color: var(--text-dark);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      color: var(--text-dark);
+      position: relative;
       overflow-x: hidden;
     }
 
-    /* ========= Background Glow + Particles (dekoratif) ========= */
-    .bg-glow {
+    /* Matrix Rain Effect */
+    #matrix {
       position: fixed;
-      inset: 0;
-      pointer-events: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.3;
+    }
+
+    /* Hacker Grid Background */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
       z-index: -2;
-    }
-    .bg-glow::before,
-    .bg-glow::after {
-      content: "";
-      position: absolute;
-      width: 60vmax; height: 60vmax;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: .18;
-      will-change: transform;
-      animation: drift 18s ease-in-out infinite;
-    }
-    .bg-glow::before { background: radial-gradient(circle, #4361ee 0%, transparent 60%); top: -20vmax; left: -10vmax; }
-    .bg-glow::after  { background: radial-gradient(circle, #7209b7 0%, transparent 60%); bottom: -25vmax; right: -15vmax; animation-delay: 6s; }
-
-    @keyframes drift {
-      0%,100% { transform: translate3d(0,0,0) scale(1); }
-      50%     { transform: translate3d(2rem,-1.5rem,0) scale(1.05); }
+      opacity: 0.3;
     }
 
-    .particles {
+    /* Scanline Effect */
+    .scanlines {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.03) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      background-size: 100% 4px;
+      z-index: 1;
       pointer-events: none;
-      z-index: -1;
-    }
-    .particle {
-      position: absolute;
-      width: 3px; height: 3px;
-      background: rgba(255,255,255,.35);
-      border-radius: 50%;
-      transform: translate3d(0,0,0);
-      animation: float linear infinite;
-      will-change: transform, opacity;
-    }
-    @keyframes float {
-      0%   { transform: translateY(0) translateX(0); opacity: .7; }
-      100% { transform: translateY(-120vh) translateX(10vw); opacity: 0; }
+      opacity: 0.2;
+      animation: scanline 8s linear infinite;
     }
 
-    /* ========= Preloader Premium yang Diperbaiki ========= */
+    @keyframes scanline {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 0 100%;
+      }
+    }
+
+    /* Glitch Effect */
+    .glitch {
+      position: relative;
+    }
+    
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+    }
+    
+    .glitch::before {
+      animation: glitch-effect 3s infinite;
+      color: #ff0080;
+      z-index: -1;
+      left: 2px;
+      text-shadow: -1px 0 #ff0080;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+    
+    .glitch::after {
+      animation: glitch-effect 2s infinite;
+      color: #00b3ff;
+      z-index: -1;
+      left: -2px;
+      text-shadow: 1px 0 #00b3ff;
+      clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    }
+    
+    @keyframes glitch-effect {
+      0% {
+        opacity: 0.6;
+        transform: translate(0);
+      }
+      20% {
+        transform: translate(-2px, 2px);
+      }
+      40% {
+        transform: translate(-2px, -2px);
+      }
+      60% {
+        transform: translate(2px, 2px);
+      }
+      80% {
+        transform: translate(2px, -2px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(0);
+        opacity: 0.6;
+      }
+    }
+
+    /* Preloader Hacker Style */
     #preloader {
       position: fixed; 
       inset: 0;
-      background: #0b1225;
+      background: #000000;
       display: grid;
       place-items: center;
       z-index: 9999;
@@ -139,6 +212,7 @@
       opacity: .8;
       animation: updown 1.8s ease-in-out infinite;
       font-size: 1.2rem;
+      font-family: 'Orbitron', monospace;
     }
     
     .pre-subtext {
@@ -146,22 +220,23 @@
       font-size: 0.9rem;
       margin-top: -15px;
       opacity: 0.7;
+      font-family: 'Share Tech Mono', monospace;
     }
     
     .pre-progress {
       width: 240px; 
       height: 8px; 
       border-radius: 10px;
-      background: rgba(255,255,255,.08); 
+      background: rgba(0, 255, 65, 0.08); 
       overflow: hidden;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      box-shadow: inset 0 0 0 1px rgba(0, 255, 65, 0.06);
       margin-top: 10px;
     }
     
     .pre-bar {
       width: 0%; 
       height: 100%;
-      background: linear-gradient(90deg, #3a0ca3, #4361ee, #4cc9f0);
+      background: linear-gradient(90deg, #00cc33, #00ff41, #00ff9d);
       border-radius: inherit;
       transition: width 0.3s ease;
       position: relative;
@@ -175,7 +250,7 @@
       left: 0;
       bottom: 0;
       width: 50px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.4), transparent);
       animation: shimmer 1.5s infinite;
     }
 
@@ -210,18 +285,20 @@
       visibility: hidden; 
     }
 
-    /* ========= Konten utama ========= */
+    /* Konten utama */
     .container {
-      backdrop-filter: blur(12px);
       background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-dark);
       padding: 30px;
-      border-radius: 20px;
-      max-width: 650px;
+      border-radius: 5px;
+      max-width: 700px;
       width: 100%;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
       margin: 20px auto;
       text-align: center;
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      position: relative;
+      overflow: hidden;
 
       /* muncul setelah preloader */
       opacity: 0; 
@@ -234,112 +311,161 @@
       transform: translateY(0); 
     }
 
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+      animation: progress 10s linear infinite;
+    }
+    
+    @keyframes progress {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 350% 0%; }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
     .logo {
       width: 90px; 
       height: 90px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 50%;
+      background: #000;
+      border-radius: 5px;
       display: flex; 
       align-items: center; 
       justify-content: center;
       margin: 0 auto 20px;
-      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+      border: 1px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, rgba(0, 255, 65, 0.2), transparent, rgba(0, 255, 65, 0.2));
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
     }
     
     .logo i { 
       font-size: 40px; 
-      color: white; 
+      color: var(--primary);
+      text-shadow: 0 0 10px var(--primary);
+      z-index: 1;
     }
 
     h1 { 
       font-weight: 700; 
-      font-size: 1.9rem; 
+      font-size: 2.2rem; 
       margin-bottom: 10px; 
-      color: var(--success); 
+      color: var(--primary);
+      font-family: 'Orbitron', monospace;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      letter-spacing: 1px;
     }
     
     .subtitle { 
       color: var(--text-light); 
-      font-size: 1rem; 
+      font-size: 1.1rem; 
       margin-bottom: 25px; 
+      font-family: 'Share Tech Mono', monospace;
     }
 
     .saweria-card {
-      background: linear-gradient(135deg, #ff7b54, #ff5e7d);
-      color: white; 
+      background: rgba(0, 20, 10, 0.9);
+      color: var(--text-dark); 
       padding: 25px; 
-      border-radius: 15px;
+      border-radius: 5px;
       margin: 25px 0; 
-      box-shadow: 0 10px 30px rgba(255, 94, 125, 0.35);
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .saweria-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+      animation: shine 3s infinite;
     }
     
     .saweria-card h2 {
-      font-size: 1.4rem; 
+      font-size: 1.6rem; 
       margin-bottom: 12px;
       display: flex; 
       align-items: center; 
       justify-content: center; 
       gap: 10px;
+      font-family: 'Orbitron', monospace;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-donasi, .btn-telegram {
       display: inline-block;
-      border-radius: 50px;
+      border-radius: 3px;
       font-weight: 600; 
       text-decoration: none;
-      transition: transform .28s ease, box-shadow .28s ease;
+      transition: all 0.3s ease;
       position: relative; 
       overflow: hidden;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 1px;
+      border: 1px solid var(--primary);
+      text-shadow: 0 0 5px var(--primary);
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
     }
     
     .btn-donasi {
-      background: linear-gradient(135deg, #ffffff, #e2e8f0);
-      color: #ff4d6d; 
-      padding: 13px 28px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      background: rgba(0, 30, 15, 0.8);
+      color: var(--primary);
+      padding: 14px 30px;
       margin-top: 10px;
     }
     
     .btn-telegram {
-      background: linear-gradient(135deg, #3a0ca3, #4361ee);
-      color: white !important; 
-      padding: 14px 32px;
-      box-shadow: 0 6px 20px rgba(67,97,238,0.35);
+      background: rgba(0, 30, 15, 0.8);
+      color: var(--primary);
+      padding: 14px 30px;
       margin-top: 20px;
     }
     
-    .btn-donasi:hover { 
-      transform: translateY(-2px) scale(1.02); 
-      box-shadow: 0 10px 26px rgba(0,0,0,.35); 
-    }
-    
-    .btn-telegram:hover { 
-      transform: translateY(-2px) scale(1.03); 
-      box-shadow: 0 12px 32px rgba(67,97,238,.55); 
-    }
-
-    /* Ripple effect */
-    .ripple {
-      position: absolute; 
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      animation: ripple .6s ease-out forwards;
-      background: rgba(255,255,255,.5);
-      pointer-events: none; 
-    }
-    
-    @keyframes ripple {
-      to { 
-        transform: translate(-50%, -50%) scale(12); 
-        opacity: 0; 
-      }
+    .btn-donasi:hover, .btn-telegram:hover { 
+      background: rgba(0, 50, 25, 0.9);
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+      transform: translateY(-2px);
     }
 
     .features h2, .info-box h2 {
-      font-size: 1.3rem; 
+      font-size: 1.5rem; 
       margin-bottom: 15px; 
       text-align: center; 
-      color: var(--success);
+      color: var(--primary);
+      font-family: 'Orbitron', monospace;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
     }
     
     .feature-grid { 
@@ -355,36 +481,21 @@
       } 
     }
 
-    /* Animasi untuk feature items */
     .feature-item {
-      background: rgba(255,255,255,0.05);
+      background: rgba(0, 20, 10, 0.7);
       padding: 18px; 
-      border-radius: 12px; 
+      border-radius: 3px; 
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
-      /* reveal awal */
-      opacity: 0; 
-      transform: translateY(20px);
-      animation: featureReveal 0.6s ease forwards;
-    }
-    
-    .feature-item:nth-child(1) { animation-delay: 0.1s; }
-    .feature-item:nth-child(2) { animation-delay: 0.2s; }
-    .feature-item:nth-child(3) { animation-delay: 0.3s; }
-    .feature-item:nth-child(4) { animation-delay: 0.4s; }
-    
-    @keyframes featureReveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
     .feature-item:hover { 
-      transform: translateY(-5px) scale(1.02); 
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
-      background: rgba(255,255,255,0.08);
+      background: rgba(0, 30, 15, 0.9);
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+      transform: translateY(-3px);
     }
     
     .feature-icon { 
@@ -392,31 +503,35 @@
       margin-bottom: 10px; 
       color: var(--primary);
       display: inline-block;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-    
-    .feature-item:hover .feature-icon {
-      transform: scale(1.2) rotate(5deg);
-      color: var(--success);
+      text-shadow: 0 0 8px var(--primary);
     }
     
     .feature-text { 
       font-size: 0.9rem; 
       color: var(--text-light);
-      transition: color 0.3s ease;
-    }
-    
-    .feature-item:hover .feature-text {
-      color: var(--text-dark);
+      font-family: 'Share Tech Mono', monospace;
     }
 
     .info-box {
-      background: rgba(255,255,255,0.05);
+      background: rgba(0, 20, 10, 0.7);
       padding: 20px; 
-      border-radius: 15px; 
+      border-radius: 3px; 
       margin: 25px 0;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(0, 255, 65, 0.2);
       text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient);
+      animation: progress 8s linear infinite;
     }
 
     .steps { 
@@ -429,6 +544,7 @@
       padding-left: 42px; 
       position: relative; 
       color: var(--text-light);
+      font-family: 'Share Tech Mono', monospace;
     }
     
     .step::before {
@@ -437,17 +553,18 @@
       position: absolute; 
       left: 0; 
       top: 0;
-      background: var(--accent); 
-      color: white;
+      background: var(--primary); 
+      color: #000;
       width: 28px; 
       height: 28px; 
-      border-radius: 50%;
+      border-radius: 3px;
       display: flex; 
       align-items: center; 
       justify-content: center;
       font-size: 13px; 
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(114,9,183,.35);
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      font-family: 'Orbitron', monospace;
     }
 
     .note { 
@@ -456,18 +573,20 @@
       margin-top: 15px; 
       text-align: center; 
       line-height: 1.6; 
+      font-family: 'Share Tech Mono', monospace;
     }
     
     footer { 
       margin-top: 25px; 
       font-size: 0.8rem; 
-      color: rgba(255,255,255,0.6); 
+      color: rgba(0, 255, 65, 0.6); 
       text-align: center; 
       max-width: 650px; 
+      font-family: 'Share Tech Mono', monospace;
     }
 
     .heart { 
-      color: #ff6b6b; 
+      color: var(--accent2); 
       animation: pulse 1.5s infinite; 
     }
     
@@ -477,34 +596,34 @@
       100% { transform: scale(1); } 
     }
 
-    /* ===== Aksesibilitas: kurangi animasi bila user minta ===== */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { 
-        animation: none !important; 
-        transition: none !important; 
-      }
-      
-      .particle { 
-        display: none; 
-      }
+    /* Matrix Rain Effect */
+    .matrix-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.1;
     }
   </style>
 </head>
 <body>
-  <!-- Background dekoratif -->
-  <div class="bg-glow" aria-hidden="true"></div>
-  <div class="particles" id="particles" aria-hidden="true"></div>
+  <!-- Background Effects -->
+  <div class="grid-bg"></div>
+  <div class="scanlines"></div>
+  <canvas id="matrix" class="matrix-rain"></canvas>
 
-  <!-- Preloader yang Diperbaiki -->
+  <!-- Preloader Hacker Style -->
   <div id="preloader" role="status" aria-live="polite" aria-label="Memuat">
     <div class="pre-box">
       <div class="pre-loader">
         <div class="pre-loader-inner"></div>
         <div class="pre-loader-inner"></div>
-        <div class="pre-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+        <div class="pre-icon"><i class="fas fa-terminal" aria-hidden="true"></i></div>
       </div>
-      <div class="pre-text">ToolsGenerator Bot</div>
-      <div class="pre-subtext">Sedang memuat...</div>
+      <div class="pre-text">SYSTEM INITIALIZATION</div>
+      <div class="pre-subtext">Loading ToolsGenerator Services...</div>
       <div class="pre-progress" aria-hidden="true">
         <div class="pre-bar" id="preBar"></div>
       </div>
@@ -517,7 +636,7 @@
       <div class="logo">
         <i class="fas fa-robot" aria-hidden="true"></i>
       </div>
-      <h1>Dukung ToolsGenerator Bot</h1>
+      <h1 class="glitch" data-text="Dukung ToolsGenerator Bot">Dukung ToolsGenerator Bot</h1>
       <p class="subtitle">Bantu kami menjaga server dan terus mengembangkan fitur-fitur bermanfaat</p>
     </div>
 
@@ -555,7 +674,7 @@
       <h2>Cara Berdonasi</h2>
       <ol class="steps">
         <li class="step">Klik tombol "Kunjungi Saweria" di atas</li>
-        <div class="step">Pilih nominal donasi yang Anda inginkan</div>
+        <li class="step">Pilih nominal donasi yang Anda inginkan</li>
         <li class="step">Lakukan pembayaran melalui metode yang tersedia</li>
         <li class="step">Kirim bukti transfer ke bot untuk verifikasi</li>
       </ol>
@@ -572,7 +691,7 @@
   </div>
 
   <footer>
-    &copy; 2025 ToolsGenerator_bot
+    &copy; 2025 ToolsGenerator_bot | Retail & Solution 
   </footer>
 
   <script>
@@ -608,43 +727,60 @@
       });
     })();
 
-    // ===== Partikel ringan (jumlah adaptif)
-    (function () {
-      const wrap = document.getElementById('particles');
-      if (!wrap) return;
-      const count = Math.min(70, Math.max(30, Math.floor(window.innerWidth / 20)));
-      for (let i = 0; i < count; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random() * 2 + 1.5;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.left = Math.random() * 100 + 'vw';
-        p.style.top = Math.random() * 100 + 'vh';
-        p.style.animationDuration = (8 + Math.random() * 14) + 's';
-        p.style.animationDelay = (-Math.random() * 20) + 's';
-        wrap.appendChild(p);
+    // ===== Matrix Rain Effect =====
+    (function() {
+      const canvas = document.getElementById('matrix');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Matrix characters
+      const matrixChars = "01ã¢ã¤ã¦ã¨ãªã«ã­ã¯ã±ã³ãµã·ã¹ã»ã½ã¿ããããããããããããããããã ã¡ã¢ã¤ã¦ã¨ã©ãªã«ã¬ã­ã¯ã²ã³abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&!?*";
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      
+      // Drops array
+      const drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
       }
-    })();
-
-    // ===== Ripple effect pada semua tombol
-    (function () {
-      function addRipple(e) {
-        const btn = e.currentTarget;
-        const rect = btn.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        const size = Math.max(rect.width, rect.height);
-        ripple.className = 'ripple';
-        ripple.style.width = ripple.style.height = size + 'px';
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        btn.appendChild(ripple);
-        ripple.addEventListener('animationend', () => ripple.remove());
+      
+      // Matrix colors
+      const colors = ['#00ff41', '#00ff9d', '#00cc88', '#00b3ff'];
+      
+      // Draw function
+      function draw() {
+        // Semi-transparent black to create trail effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = `${fontSize}px 'Share Tech Mono'`;
+        
+        for (let i = 0; i < drops.length; i++) {
+          const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          
+          ctx.fillStyle = color;
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          
+          // Reset drop if it reaches bottom or randomly
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          
+          drops[i]++;
+        }
       }
-      document.querySelectorAll('.btn-donasi, .btn-telegram').forEach(btn => {
-        btn.addEventListener('click', addRipple);
+      
+      // Animation loop
+      setInterval(draw, 50);
+      
+      // Resize handler
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       });
     })();
   </script>
